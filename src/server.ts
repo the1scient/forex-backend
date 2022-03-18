@@ -1,11 +1,17 @@
 import express from 'express';
 import { Router, Request, Response } from 'express';
-const app = express();
 const route = Router();
-app.use(express());
 const mongoose = require('mongoose');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var cors = require('cors');
+var path = require('path');
+var createError = require('http-errors');
+
 
 const indexRoute = require('./routes/index');
+const userRoute = require('./routes/user');
+const usersRoute = require('./routes/users');
 
 
 // this will add the .env database configuration with host, user and password for mongodb
@@ -28,23 +34,42 @@ database.once('connected', () => {
    console.log("[DATABASE] Successfully connected!")
 });
 
+
+let app = express();
+
+const allowedOrigins = ['http://localhost:3000', '*']
+// @ts-ignore weird namespace error
+const options: cors.CorsOptions = {
+   origin: allowedOrigins
+};
+
+
+app.use(cors());
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
+// routers
 app.use('/', indexRoute);
+app.use('/user', userRoute);
+app.use('/users', usersRoute);
 
-/**
-route.get('/', (req: Request, res: Response) =>  {
-   res.send('Olá mundo!');
 
-});
- */
 
-route.get('/users', (req: Request, res: Response) => {
-   res.send("Users");
-});
+
+
 
 
 
 app.use(route);
+const PORT = 9000;
 
-const PORT = 3333;
+
+
 
 app.listen(PORT, () => `[SERVER] Running on port ${PORT}`);
