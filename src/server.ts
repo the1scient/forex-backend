@@ -6,13 +6,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var path = require('path');
-var createError = require('http-errors');
 
 
 const indexRoute = require('./routes/index');
 const userRoute = require('./routes/user');
 const usersRoute = require('./routes/users');
-
+const postRoute = require('./routes/post');
 
 // this will add the .env database configuration with host, user and password for mongodb
 require('dotenv').config();
@@ -37,7 +36,7 @@ database.once('connected', () => {
 
 let app = express();
 
-const allowedOrigins = ['http://localhost:3000', '*']
+const allowedOrigins = ['http://localhost:3000', 'http://35.198.44.247:3000']
 // @ts-ignore weird namespace error
 const options: cors.CorsOptions = {
    origin: allowedOrigins
@@ -58,6 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRoute);
 app.use('/user', userRoute);
 app.use('/users', usersRoute);
+app.use('/post', postRoute);
 
 
 

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 // this will define the database schema for data to be inserted and data to be retrieved
-
-const dataSchema = new mongoose.Schema({
+/**
+const usersSchema = new mongoose.Schema({
 
     name: {
         required: true,
@@ -21,4 +21,38 @@ const dataSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Data', dataSchema);
+*/
+
+
+const tradeSchema: any = new mongoose.Schema( {
+
+    time: {
+        required: true,
+        type: Date
+    },
+
+    instrument: {
+        required: true,
+        type: String
+    },
+
+    rate: {
+        required: true,
+        type: Number
+    },
+
+    type: {
+        required: true,
+        type: String
+    },
+
+    amount: {
+        required: true,
+        type: Number
+    }
+
+});
+
+
+module.exports = mongoose.model('Trades', tradeSchema);
+// module.exports = mongoose.model('Data', usersSchema);

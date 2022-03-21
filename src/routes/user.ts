@@ -2,7 +2,7 @@
 const express = require('express');
 // @ts-ignore
 const router = express.Router();
-
+// @ts-ignore
 const Model = require('../models/database');
 
 //Get by ID Method
