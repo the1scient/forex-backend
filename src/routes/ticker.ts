@@ -17,7 +17,7 @@ const ws = new websocket('wss://streamer.finance.yahoo.com');
 function connect() {
 
     ws.onopen = function open() {
-        console.log('connected');
+        console.log('[WEBSOCKET] Successfully connected!');
         ws.send(JSON.stringify({
             subscribe: ['GBPUSD=X']
         }));
