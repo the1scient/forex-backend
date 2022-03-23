@@ -7,7 +7,7 @@ const router = express.Router();
 const Model = require('../models/database');
 
 //Get by ID Method
-router.get('/', async (req: { params: { id: any; }; }, res: { json: (arg0: any) => void; status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): any; }; }; }, next: any) => {
+router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: any) => void; status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): any; }; }; }, next: any) => {
 
     try {
         const data = await Model.find().sort({_id: -1});
