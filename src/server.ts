@@ -8,10 +8,10 @@ var cors = require('cors');
 var path = require('path');
 
 
+
 const indexRoute = require('./routes/index');
 const tradesRoute = require('./routes/trades');
 const postRoute = require('./routes/post');
-const tickerRoute = require('./routes/ticker');
 
 // this will add the .env database configuration with host, user and password for mongodb
 require('dotenv').config();
@@ -35,8 +35,9 @@ database.once('connected', () => {
 
 
 let app = express();
+let appws = require('express-ws-routes')();
 
-const allowedOrigins = ['http://localhost:3000', 'http://35.198.44.247:3000']
+const allowedOrigins = ['http://localhost:3000', '*']
 // @ts-ignore weird namespace error
 const options: cors.CorsOptions = {
    origin: allowedOrigins
@@ -55,9 +56,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routers
 app.use('/', indexRoute);
-app.use('/ticker', tickerRoute);
 app.use('/trades', tradesRoute);
 app.use('/post', postRoute);
+
 
 
 
