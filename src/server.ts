@@ -25,16 +25,17 @@ mongoose.connect(mongoString);
 const database = mongoose.connection;
 
 // now verify if the connection was successful or not
-database.on('error', (error: any) => {
-   console.log(error);
+database.on('error', async (error: String) => {
+   await console.log(error);
 })
 
 // and if the connection was successful, then celebrate with a console log
 
-database.once('connected', () => {
-   console.log("[DATABASE] Successfully connected!")
-});
 
+database.once('connected', async () => {
+   await console.log("[DATABASE] Successfully connected!");
+});
+ 
 
 // create express app
 let app = express();
@@ -70,6 +71,6 @@ app.use(route);
 const PORT = 9000;
 
 
-
+module.exports = app;
 
 app.listen(PORT, () => `[SERVER] Running on port ${PORT}`);

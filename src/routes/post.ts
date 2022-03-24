@@ -1,22 +1,22 @@
-// @ts-ignore
 const express = require('express');
-// @ts-ignore
 const router = express.Router();
-// @ts-ignore
 const Model = require('../models/database');
 
 
 
-router.post('/', async function(req: { body: { time: any; instrument: String; rate: Number; type: String; amount: Number;  }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): any; }; }; }, next: any) {
+router.post('/', async function(req: { body: { time: String; instrument: String; rate: Number; type: String; amount: Number;  }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): any; }; }; }, next: any) {
 
-    let Rate = req.body.rate.toFixed(3);
+   
 
+if(!req.body.instrument || req.body.rate || req.body.type || req.body.amount) {
+}
 
-
+if(req.body.rate == null || req.body.rate == undefined || req.body.rate < 0 || req.body.rate == NaN) {
+}
     const data = new Model({
         time: new Date(),
         instrument: req.body.instrument,
-        rate: Rate,
+        rate: req.body.rate.toFixed(3),
         type: req.body.type,
         amount: req.body.amount
     });
@@ -36,6 +36,5 @@ router.post('/', async function(req: { body: { time: any; instrument: String; ra
 
 });
 
-
-
+export { router as postsRouter };
 module.exports = router;
