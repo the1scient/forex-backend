@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "tsc",
-    "test": "jest --watchAll --verbose --detectOpenHandles"
+    "test": "jest --watchAll --verbose --detectOpenHandles --maxWorkers=1"
   },
   "keywords": [],
   "author": "",
