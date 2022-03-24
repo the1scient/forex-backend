@@ -3,15 +3,23 @@ const router = express.Router();
 const Model = require('../models/database');
 
 
+type postDataProps = {
+    time: String,
+    instrument: String,
+    rate: Number,
+    type: String,
+    amount: Number
+}
 
-router.post('/', async function(req: { body: { time: String; instrument: String; rate: Number; type: String; amount: Number;  }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): any; }; }; }, next: any) {
 
-   
+  
+router.post('/', async function(req: { body: postDataProps; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): Object; }; }; }, next: String) {
 
 if(!req.body.instrument || req.body.rate || req.body.type || req.body.amount) {
 }
 
 if(req.body.rate == null || req.body.rate == undefined || req.body.rate < 0 || req.body.rate == NaN) {
+    req.body.rate = 1.321;
 }
     const data = new Model({
         time: new Date(),
@@ -36,5 +44,8 @@ if(req.body.rate == null || req.body.rate == undefined || req.body.rate < 0 || r
 
 });
 
-export { router as postsRouter };
+
+export { router as postRouter };
+
+
 module.exports = router;

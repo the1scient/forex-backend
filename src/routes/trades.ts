@@ -3,7 +3,12 @@ const router = express.Router();
 const Model = require('../models/database');
 
 //Get All
-router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: any) => void; status: (arg0: number) => { (): any; new(): Object; json: { (arg0: { message: any; }): void; new(): any; }; }; }, next: any) => {
+
+type message = {
+    error: string
+}
+
+router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: any; }): void; new(): Object; }; }; }, next: String) => {
 
     try {
         const data = await Model.find().sort({_id: -1});
