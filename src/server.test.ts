@@ -31,7 +31,7 @@ describe("Test endpoints", () => {
     
   });
 
-// create a test to verify if post method is working
+  // create a test to verify if post method is working
   it.todo('It should response with status 200 after inserting data in the database'/**, () => {
     return request(app)
       .post("/post")
@@ -47,7 +47,7 @@ describe("Test endpoints", () => {
   } */) ;
   
 
-// create a test that returns an error if instrument is missing in post route
+  // create a test that returns an error if instrument is missing in post route
   test('It should return an error if instrument is missing', () => {
     return request(app)
       .post("/post")
@@ -99,7 +99,7 @@ describe("Test endpoints", () => {
 
 
 
-// create a test that returns an error if amount is missing in post route
+  // create a test that returns an error if amount is missing in post route
   test('It should return an error if amount is missing', () => {
     return request(app)
       .post("/post")
@@ -137,5 +137,11 @@ describe("Test endpoints", () => {
       });
     });
 
+
+
+
+
+
+    // describe ending
 });
 

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Model = require('../models/database');
 
-//Get All
+//Get All Trades
 
 type message = {
     error: string

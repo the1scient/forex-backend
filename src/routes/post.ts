@@ -15,12 +15,15 @@ type postDataProps = {
   
 router.post('/', async function(req: { body: postDataProps; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): Object; }; }; }, next: String) {
 
-if(!req.body.instrument || req.body.rate || req.body.type || req.body.amount) {
-}
+    if(!req.body.instrument || req.body.rate || req.body.type || req.body.amount) {
+    }
 
-if(req.body.rate == null || req.body.rate == undefined || req.body.rate < 0 || req.body.rate == NaN) {
-    req.body.rate = 1.321;
-}
+    if(req.body.rate == null || req.body.rate == undefined || req.body.rate < 0 || req.body.rate == NaN) {
+        req.body.rate = 1.321;
+        alert('Rate is not valid. Redirecting to home page.');
+        window.location.href='http://localhost:3000';
+    }
+
     const data = new Model({
         time: new Date(),
         instrument: req.body.instrument,
