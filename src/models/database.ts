@@ -1,37 +1,42 @@
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
+const database = require('../db.ts');
 
-
-
-const tradeSchema = new mongoose.Schema( {
-
-    // defining the database schema (the fields)
-
+const Trades = database.define('trades', {
+    
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     time: {
-        required: true,
-        type: Date
+        type: Sequelize.STRING,
+        allowNull: false
     },
-
     instrument: {
-        required: true,
-        type: String
+        type: Sequelize.STRING,
+        allowNull: false
     },
-
     rate: {
-        required: true,
-        type: Number
+        type: Sequelize.FLOAT,
+        allowNull: false
     },
-
     type: {
-        required: true,
-        type: String
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    amount: {
+        type: Sequelize.INTEGER,
+        allowNull: false
     },
 
-    amount: {
-        required: true,
-        type: Number
-    }
+    timestamps: false,
+    createdAt: false,
+    updatedAt: false
+    
 
-});
+    
+ } );
 
 
-module.exports = mongoose.model('Trades', tradeSchema);
+
+module.exports = Trades;

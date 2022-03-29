@@ -1,25 +1,37 @@
+
 const express = require('express');
 const router = express.Router();
-const Model = require('../models/database');
+const database = require('../db');
+const Trades = require('../models/database');
+
 
 //Get All Trades
+	
+// create a router get with correct req and res types
 
-type message = {
-    error: string
-}
 
-router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: any; }): void; new(): Object; }; }; }, next: String) => {
 
+router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: String; }): void; new(): Object; }; }; }) => {
     try {
-        const data = await Model.find().sort({_id: -1});
-        res.json(data);
+        /** 
+        const trades = await Model.findAll();
+        console.log(trades);
+        res.status(200).json(trades);*/
+        // set updatedAt, createdAt false
+        const trades = await Trades.findAll({
+            attributes: {
+                exclude: ['updatedAt', 'createdAt', 'timestamps']
+            }
+        });
+        res.status(200).json(trades);
+        
+        
 
     }
     catch(error) {
-        res.status(500).json({message: error});
+        console.log(error);
+        res.status(500).json({message: "Something went wrong"});
     }
-
-
 
 });
 

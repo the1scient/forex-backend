@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req: String, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: string; }): void; new(): any; }; }; }, next: any) {
+router.get('/', async (req: String, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: String; }): void; new(): Object; }; }; }) => {
     
     res.status(200).json({message: "hi there! this is the back-end =)"});
     

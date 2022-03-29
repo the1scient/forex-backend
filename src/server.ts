@@ -4,7 +4,7 @@ import cors from 'cors';
 
 // defining constants and variables
 const route = Router();
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let path = require('path');
@@ -15,27 +15,12 @@ const indexRoute = require('./routes/index');
 const tradesRoute = require('./routes/trades');
 const postRoute = require('./routes/post');
 
-// this will add the .env database configuration with host, user and password for mongodb
-require('dotenv').config();
-const mongoString = process.env.DATABASE_URL;
-
-// now this will make the mongodb connection
-mongoose.connect(mongoString);
-// and assign to the const database the connection that was made
-const database = mongoose.connection;
-
-// now verify if the connection was successful or not
-database.on('error', async (error: String) => {
-   await console.log(error);
-})
-
-// and if the connection was successful, then celebrate with a console log
 
 
-database.once('connected', async () => {
-   await console.log("[DATABASE] Successfully connected!");
-});
- 
+
+
+
+
 
 // create express app
 let app = express();
