@@ -6,12 +6,10 @@ const Trades = require('../models/database');
 
 
 //Get All Trades
-	
-// create a router get with correct req and res types
-
 
 
 router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: String; }): void; new(): Object; }; }; }) => {
+
     try {
         /** 
         const trades = await Model.findAll();
@@ -28,9 +26,10 @@ router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: St
         
 
     }
+    
     catch(error) {
-        console.log(error);
-        res.status(500).json({message: "Something went wrong"});
+       console.log(error);
+        res.status(500).json({message: "Something went wrong! :("});
     }
 
 });

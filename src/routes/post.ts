@@ -13,7 +13,7 @@ type postDataProps = {
 
 
   
-router.post('/', async (req: { body: postDataProps }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: any; }): void; new(): Object; }; }; }) => {
+router.post('/', async (req: { body: postDataProps }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: String; }): void; new(): Object; }; }; }) => {
 
     if(!req.body.instrument || req.body.rate || req.body.type || req.body.amount) {
     }
