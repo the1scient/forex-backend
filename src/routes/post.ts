@@ -1,19 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const Model = require('../models/database');
+const Trades = require('../models/database');
 
 
 type postDataProps = {
-    time: String,
+    time: JSON,
     instrument: String,
     rate: Number,
     type: String,
     amount: Number
 }
 
-
   
-router.post('/', async (req: { body: postDataProps }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: String; }): void; new(): Object; }; }; }) => {
+router.post('/', async (req: { body: postDataProps }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: String; }): void; new(): Object; }; }; }, next: any) => {
 
     if(!req.body.instrument || req.body.rate || req.body.type || req.body.amount) {
     }
@@ -24,13 +23,26 @@ router.post('/', async (req: { body: postDataProps }, res: { json: (arg0: String
         window.location.href='http://localhost:3000';
     }
 
+    /** 
     const data = new Model({
         time: new Date(),
         instrument: req.body.instrument,
         rate: req.body.rate.toFixed(3),
         type: req.body.type,
         amount: req.body.amount
+    });*/
+    // create a postgres post data object
+    const data = new Trades({
+        timestamp: false,
+        createdAt: false,
+        exclude: ['updatedAt', 'createdAt', 'timestamps', 'id'],
+        time: new Date().toJSON(),
+        instrument: req.body.instrument,
+        rate: req.body.rate.toFixed(3),
+        type: req.body.type,
+        amount: req.body.amount
     });
+
 
     try {
 
@@ -38,6 +50,7 @@ router.post('/', async (req: { body: postDataProps }, res: { json: (arg0: String
         res.status(200).json(dataToSave);
 
     }
+
     catch(error) {
         console.log(error);
         res.status(500)
@@ -49,6 +62,5 @@ router.post('/', async (req: { body: postDataProps }, res: { json: (arg0: String
 
 
 export { router as postRouter };
-
 
 module.exports = router;

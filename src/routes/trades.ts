@@ -1,14 +1,11 @@
 
 const express = require('express');
 const router = express.Router();
-const database = require('../db');
 const Trades = require('../models/database');
 
 
 //Get All Trades
-
-
-router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: String; }): void; new(): Object; }; }; }) => {
+router.get('/', async (req: { }, res: { json: (arg0: String) => void; status: (arg0: number) => { (): Function; new(): Object; json: { (arg0: { message: String; }): void; new(): Object; }; }; }) => {
 
     try {
         /** 
@@ -19,7 +16,10 @@ router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: St
         const trades = await Trades.findAll({
             attributes: {
                 exclude: ['updatedAt', 'createdAt', 'timestamps']
-            }
+            },
+            order : [
+                ['id', 'DESC']
+            ]
         });
         res.status(200).json(trades);
         
@@ -36,4 +36,5 @@ router.get('/', async (req: { params: { id: String; }; }, res: { json: (arg0: St
 
 // exporting to prevent scope errors
 export { router as tradesRouter };
+
 module.exports = router;

@@ -8,6 +8,7 @@ const Trades = database.define('trades', {
         primaryKey: true,
         autoIncrement: true
     },
+
     time: {
         type: Sequelize.STRING,
         allowNull: false
@@ -29,12 +30,13 @@ const Trades = database.define('trades', {
         allowNull: false
     },
 
+    
+    
+ }, {
     timestamps: false,
     createdAt: false,
-    updatedAt: false
-    
-
-    
+    updatedAt: false,
+    id: false
  } );
 
 
