@@ -4,7 +4,6 @@ const Trades = require('../models/database');
 
 
 type postDataProps = {
-    time: JSON,
     instrument: String,
     rate: Number,
     type: String,
@@ -31,12 +30,12 @@ router.post('/', async (req: { body: postDataProps }, res: { json: (arg0: String
         type: req.body.type,
         amount: req.body.amount
     });*/
+
     // create a postgres post data object
     const data = new Trades({
         timestamp: false,
         createdAt: false,
-        exclude: ['updatedAt', 'createdAt', 'timestamps', 'id'],
-        time: new Date().toJSON(),
+        exclude: ['updatedAt', 'createdAt', 'timestamps', 'id', 'time'],
         instrument: req.body.instrument,
         rate: req.body.rate.toFixed(3),
         type: req.body.type,

@@ -11,7 +11,7 @@ const Trades = database.define('trades', {
 
     time: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     instrument: {
         type: Sequelize.STRING,
