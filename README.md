@@ -16,7 +16,9 @@ A back-end is usually a server which makes the connection with the database, API
  
  alternatively, you can use yarn
 > yarn install
+
  and then:
+
 > yarn dev
 
 
