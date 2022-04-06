@@ -23,10 +23,10 @@ A back-end is usually a server which makes the connection with the database, API
 
  ### Testing:
  The tests are made with **Jest**. You can test it with:
- > jest server.test.ts
+ > yarn jest server.test.ts
 
  to see the test coverage:
- > jest server.test.ts --coverage
+ > yarn jest server.test.ts --coverage
  
  
 ### .Env file configuration:
